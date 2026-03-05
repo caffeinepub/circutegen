@@ -1,0 +1,189 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* JetBrains Mono - monospaced for technical labels */
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/assets/fonts/JetBrainsMono[wght].woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Sora - clean geometric sans for headings */
+@font-face {
+  font-family: "Sora";
+  src: url("/assets/fonts/Sora[wght].woff2") format("woff2");
+  font-weight: 100 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Geist Mono - secondary mono */
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/assets/fonts/GeistMono[wght].woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+    /* Deep navy dark theme - always dark */
+    --background: 0.1 0.015 250;
+    --foreground: 0.93 0.02 220;
+    --card: 0.13 0.018 245;
+    --card-foreground: 0.93 0.02 220;
+    --popover: 0.15 0.02 245;
+    --popover-foreground: 0.93 0.02 220;
+    --primary: 0.78 0.18 195;
+    --primary-foreground: 0.08 0.015 250;
+    --secondary: 0.18 0.02 240;
+    --secondary-foreground: 0.75 0.05 220;
+    --muted: 0.16 0.018 245;
+    --muted-foreground: 0.55 0.04 230;
+    --accent: 0.78 0.18 195;
+    --accent-foreground: 0.08 0.015 250;
+    --destructive: 0.6 0.22 25;
+    --destructive-foreground: 0.98 0.005 0;
+    --border: 0.25 0.02 240;
+    --input: 0.2 0.018 245;
+    --ring: 0.78 0.18 195;
+    --chart-1: 0.78 0.18 195;
+    --chart-2: 0.75 0.2 140;
+    --chart-3: 0.72 0.22 50;
+    --chart-4: 0.7 0.2 300;
+    --chart-5: 0.65 0.22 25;
+    --sidebar: 0.11 0.016 248;
+    --sidebar-foreground: 0.93 0.02 220;
+    --sidebar-primary: 0.78 0.18 195;
+    --sidebar-primary-foreground: 0.08 0.015 250;
+    --sidebar-accent: 0.18 0.02 240;
+    --sidebar-accent-foreground: 0.75 0.05 220;
+    --sidebar-border: 0.25 0.02 240;
+    --sidebar-ring: 0.78 0.18 195;
+
+    /* Custom circuit tokens */
+    --cyan: 0.78 0.18 195;
+    --cyan-bright: 0.88 0.22 195;
+    --cyan-dim: 0.55 0.12 195;
+    --amber: 0.75 0.2 65;
+    --amber-glow: 0.82 0.18 65;
+    --green-active: 0.72 0.18 145;
+    --navy-deep: 0.08 0.015 250;
+    --navy-canvas: 0.1 0.012 248;
+    --glass-bg: 0.14 0.018 245;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Sora", system-ui, sans-serif;
+  }
+}
+
+/* Component-specific animation keyframes */
+@keyframes electron-pulse {
+  0%, 100% { opacity: 1; filter: drop-shadow(0 0 4px oklch(0.88 0.22 195)); }
+  50% { opacity: 0.6; filter: drop-shadow(0 0 8px oklch(0.88 0.22 195)); }
+}
+
+@keyframes led-glow {
+  0%, 100% { filter: drop-shadow(0 0 6px oklch(0.82 0.18 65)) drop-shadow(0 0 12px oklch(0.75 0.2 65)); }
+  50% { filter: drop-shadow(0 0 10px oklch(0.82 0.18 65)) drop-shadow(0 0 20px oklch(0.75 0.2 65)); }
+}
+
+@keyframes component-active-pulse {
+  0%, 100% { filter: drop-shadow(0 0 3px oklch(0.78 0.18 195)); }
+  50% { filter: drop-shadow(0 0 8px oklch(0.78 0.18 195)); }
+}
+
+@keyframes circuit-entrance {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes generating-pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+/* Circuit canvas dot grid */
+.circuit-canvas-bg {
+  background-color: oklch(0.1 0.012 248);
+  background-image: radial-gradient(circle, oklch(0.35 0.03 220) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Glass panel effect */
+.glass-panel {
+  background: oklch(0.14 0.018 245 / 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid oklch(0.28 0.025 240 / 0.6);
+}
+
+/* Cyan glow button */
+.btn-cyan-glow {
+  box-shadow: 0 0 12px oklch(0.78 0.18 195 / 0.3), 0 0 24px oklch(0.78 0.18 195 / 0.1);
+  transition: box-shadow 0.2s ease;
+}
+.btn-cyan-glow:hover {
+  box-shadow: 0 0 16px oklch(0.78 0.18 195 / 0.5), 0 0 32px oklch(0.78 0.18 195 / 0.2);
+}
+
+/* Active component glow */
+.component-active {
+  animation: component-active-pulse 2s ease-in-out infinite;
+}
+
+.led-glow {
+  animation: led-glow 1.5s ease-in-out infinite;
+}
+
+/* Mono label style */
+.mono-label {
+  font-family: "JetBrains Mono", "Geist Mono", monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: oklch(0.12 0.015 248);
+}
+::-webkit-scrollbar-thumb {
+  background: oklch(0.28 0.025 240);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(0.38 0.05 200);
+}
